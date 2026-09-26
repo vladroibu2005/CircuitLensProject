@@ -1,95 +1,243 @@
-# CircuitLensProject
-# UNO Q — Edge AI & Embedded Vision Platform
+# AI-Powered Portable Electronics Inspection & Diagnostic Tool
 
-An embedded systems project built around the **Arduino UNO Q 4GB**, combining Linux, microcontroller control, computer vision, sensors, and custom hardware into a single experimental platform.
+A portable embedded system designed to use **computer vision and AI to inspect electronic boards, identify components, and assist with visual diagnostics**.
 
-The project started as a concept developed for the **Autodesk University 2027 Product Contest** and will be progressively developed into a functional prototype.
+The system is built around the **Arduino UNO Q 4GB**, combining embedded Linux, AI/computer vision, real-time microcontroller control, sensors, and custom hardware into a single portable device.
 
-## Overview
+> **From visual inspection to intelligent electronics diagnostics.**
 
-The goal of this project is to explore the capabilities of the Arduino UNO Q by combining its two computing environments:
+---
 
-* **Qualcomm QRB2210** — Linux-based application processor for high-level processing, computer vision, AI, networking, and data handling.
-* **STM32U585** — microcontroller for real-time embedded control and interaction with sensors and actuators.
+## 🎯 Project Overview
 
-The final system is intended to act as a small **edge-computing and embedded vision platform**, where computationally intensive tasks can run on Linux while deterministic hardware control is handled by the STM32.
+Electronic boards can contain dozens or hundreds of components, making visual inspection time-consuming and difficult to perform manually.
 
-## Planned Features
+This project aims to develop a compact device that can **look at an electronic board through a camera and automatically extract useful information from it**.
 
-The project will be developed incrementally. Planned functionality includes:
+The long-term goal is to combine:
 
-* 📷 Camera-based computer vision
-* 🤖 Edge AI / machine learning experiments
-* 🔌 Sensor integration
-* ⚙️ Real-time actuator control
-* 🖥️ Display and user interface
-* 🌐 Network connectivity
-* 🔄 Communication between Linux and the STM32
-* 🔋 Hardware power management
-* 🧩 Custom PCB development
-* 🏠 Custom 3D-printed enclosure
+**Camera → Computer Vision → AI → Analysis → Diagnostic Assistance**
 
-The exact feature set may evolve during development as different hardware and software approaches are tested.
+The system will initially focus on visual inspection of PCBs and electronic components, with the possibility of extending the platform toward more advanced diagnostic functionality.
 
-## System Architecture
+### Potential capabilities
+
+* Component detection and identification
+* PCB and component localization
+* Visual inspection of component placement
+* Detection of missing components
+* Detection of potentially misplaced components
+* PCB layout comparison
+* Reading component markings
+* Visual identification of damaged components
+* Assisted troubleshooting
+
+The project is an experimental platform and is **not intended to replace professional electrical test equipment or industrial AOI systems**.
+
+---
+
+# 🧠 System Architecture
+
+The system takes advantage of the two computing environments available on the Arduino UNO Q.
 
 ```text
-                  ┌─────────────────────────────┐
-                  │        Arduino UNO Q        │
-                  │                             │
-                  │  ┌───────────────────────┐  │
-                  │  │ Qualcomm QRB2210      │  │
-                  │  │ Debian Linux          │  │
-                  │  │                       │  │
-Camera ──────────►│  │ Computer Vision       │  │
-                  │  │ AI / ML               │  │
-                  │  │ Networking            │  │
-                  │  │ Data Processing       │  │
-                  │  └───────────┬───────────┘  │
-                  │              │              │
-                  │       Linux ↔ MCU           │
-                  │              │              │
-                  │  ┌───────────▼───────────┐  │
-Sensors ─────────►│  │ STM32U585              │  │
-                  │  │ Real-Time Control      │  │
-Actuators ◄───────│  │ GPIO / PWM / ADC       │  │
-                  │  │ Embedded Logic         │  │
-                  │  └───────────────────────┘  │
-                  └─────────────────────────────┘
+                         ┌───────────────────┐
+                         │   Electronic PCB  │
+                         └─────────┬─────────┘
+                                   │
+                                   ▼
+                         ┌───────────────────┐
+                         │      Camera       │
+                         └─────────┬─────────┘
+                                   │
+                                   ▼
+              ┌────────────────────────────────────┐
+              │         Qualcomm QRB2210           │
+              │             Debian Linux            │
+              │                                    │
+              │  • Image acquisition               │
+              │  • OpenCV                          │
+              │  • Computer Vision                 │
+              │  • AI / ML inference               │
+              │  • Image analysis                  │
+              │  • Diagnostic logic                │
+              └────────────────┬───────────────────┘
+                               │
+                         Linux ↔ STM32
+                               │
+                               ▼
+              ┌────────────────────────────────────┐
+              │             STM32U585              │
+              │                                    │
+              │  • Sensor acquisition              │
+              │  • Lighting control                 │
+              │  • Motors / actuators               │
+              │  • GPIO / PWM / ADC                │
+              │  • Real-time hardware control      │
+              └────────────────────────────────────┘
 ```
 
-## Hardware
+The **QRB2210/Linux side** is intended for computationally intensive tasks, while the **STM32U585** handles hardware-level and real-time operations.
 
-### Main Platform
+---
 
-* Arduino UNO Q 4GB
-* External camera
-* Sensors and modules
-* Actuators
-* Display
-* Custom PCB
-* Custom enclosure
+# 🔍 Inspection Workflow
 
-Additional components will be added as the project develops.
+A typical inspection could eventually follow this pipeline:
 
-## Software
+```text
+        PCB placed in device
+                  │
+                  ▼
+           Image capture
+                  │
+                  ▼
+          Image preprocessing
+                  │
+                  ▼
+          PCB detection
+                  │
+                  ▼
+       Component detection
+                  │
+                  ▼
+       Component classification
+                  │
+                  ▼
+       Layout / reference comparison
+                  │
+                  ▼
+        Potential anomalies
+                  │
+                  ▼
+       Diagnostic information
+```
 
-The project is expected to use multiple software environments:
+The system will be developed incrementally, beginning with simple visual detection and gradually adding more advanced analysis.
 
-### Linux side
+---
 
+# 🤖 AI & Computer Vision
+
+The project will explore both **traditional computer vision** and **AI-based approaches**.
+
+### Classical Computer Vision
+
+Potential techniques include:
+
+* Image filtering
+* Thresholding
+* Edge detection
+* Contour detection
+* Morphological operations
+* Perspective correction
+* Template matching
+* Geometric analysis
+
+### AI-Based Vision
+
+Potential applications include:
+
+* Object detection
+* Component classification
+* PCB feature detection
+* Anomaly detection
+* OCR / component marking recognition
+* Image classification
+
+The final approach will be selected based on the performance and requirements of the actual hardware.
+
+---
+
+# 🧩 What Could Be Detected?
+
+The initial target is to identify common electronic components and PCB features.
+
+Possible targets include:
+
+| Category           | Examples                                 |
+| ------------------ | ---------------------------------------- |
+| Passive components | Resistors, capacitors, inductors         |
+| ICs                | Integrated circuits                      |
+| Connectors         | Headers, USB connectors, terminals       |
+| Semiconductors     | Diodes, transistors                      |
+| PCB features       | Pads, traces, mounting holes             |
+| Markings           | Component labels, reference designators  |
+| Anomalies          | Missing or incorrectly placed components |
+
+The exact detection capabilities will depend on the models, camera, lighting, and image quality developed during the project.
+
+---
+
+# 🩺 Diagnostic Assistance
+
+One of the long-term goals is to move beyond simple object detection.
+
+Instead of only answering:
+
+> **"What components are on this PCB?"**
+
+the system could eventually help answer:
+
+> **"Does this PCB appear to match the expected configuration?"**
+
+For example:
+
+```text
+Reference PCB
+      │
+      ▼
+Expected component layout
+      │
+      │
+      ▼
+┌─────────────────┐
+│     AI Vision   │
+└────────┬────────┘
+         │
+         ▼
+Actual PCB image
+         │
+         ▼
+Comparison
+         │
+         ▼
+Potential differences
+```
+
+Possible results could include:
+
+* Missing component
+* Unexpected component
+* Incorrect placement
+* Different component orientation
+* Visible physical damage
+* Uncertain / requires manual inspection
+
+These results would be treated as **diagnostic assistance**, not as definitive electrical diagnoses.
+
+---
+
+# 🖥️ Hardware Platform
+
+## Arduino UNO Q 4GB
+
+The main computing platform is the **Arduino UNO Q 4GB**.
+
+It combines:
+
+### Qualcomm QRB2210
+
+* Quad-core ARM Cortex-A53
 * Debian Linux
-* Python
-* OpenCV
-* Machine learning / computer vision frameworks
-* Linux command-line tools
-* Networking and data-processing libraries
+* GPU acceleration
+* High-level application processing
+* Computer vision and AI workloads
 
-### Microcontroller side
+### STM32U585
 
-* Arduino / Zephyr-based development
-* C/C++
-* STM32 peripherals
+* ARM Cortex-M33
+* Real-time microcontroller
 * GPIO
 * PWM
 * ADC
@@ -98,93 +246,231 @@ The project is expected to use multiple software environments:
 * UART
 * CAN
 
-## Development Approach
+This architecture makes the UNO Q particularly interesting for combining **embedded control with Linux-based AI workloads**.
 
-The project is being developed incrementally rather than as a single large implementation.
+---
 
-Each stage follows a simple workflow:
+# 📷 Camera
+
+The camera is one of the most important components of the system.
+
+The project will investigate camera characteristics such as:
+
+* Resolution
+* Frame rate
+* Focus
+* Working distance
+* Field of view
+* Image quality
+* Low-light performance
+
+Controlled illumination will also be investigated because PCB inspection can be highly dependent on lighting conditions.
+
+---
+
+# 💡 Controlled Illumination
+
+PCB components can produce reflections and shadows that make computer vision more difficult.
+
+The final device may therefore include controlled lighting around the inspection area.
 
 ```text
-Hardware
-   ↓
-Basic test
-   ↓
-Software implementation
-   ↓
-Integration
-   ↓
-Experiment
-   ↓
-Optimization
-   ↓
-Final prototype
+          ┌───────────────────┐
+          │     CAMERA        │
+          │        ▼          │
+          │       📷          │
+          │                   │
+          │   💡       💡     │
+          │                   │
+          │      ┌─────┐      │
+          │      │ PCB │      │
+          │      └─────┘      │
+          └───────────────────┘
 ```
 
-This allows individual components to be tested independently before combining them into the complete system.
+Lighting intensity and configuration could potentially be controlled by the STM32.
 
-## Project Status
+---
 
-🚧 **In Development**
+# 🏗️ Physical Design
 
-### Current status
+The device is intended to become a **portable, self-contained inspection tool** rather than a collection of components on a breadboard.
+
+The enclosure concept was initially developed in **Autodesk Fusion**.
+
+The planned enclosure can accommodate:
+
+* Camera
+* Display
+* User controls
+* UNO Q
+* Custom electronics
+* PCB inspection area
+* Lighting
+* Power system
+
+The mechanical design will evolve together with the electronics.
+
+---
+
+# 🔌 Custom Hardware
+
+A custom PCB is planned for the final prototype.
+
+Potential functions include:
+
+* Power distribution
+* Sensor connections
+* Lighting control
+* Actuator drivers
+* User interface
+* Communication interfaces
+* Peripheral connections
+
+The PCB will be designed after the main system architecture and component requirements have been validated experimentally.
+
+---
+
+# 🛠️ Software Stack
+
+## Linux / Application Processor
+
+Potential technologies:
+
+* Debian Linux
+* Python
+* OpenCV
+* Machine Learning frameworks
+* Computer Vision libraries
+* OCR tools
+* Linux system utilities
+
+## STM32 / Embedded Controller
+
+Potential technologies:
+
+* C/C++
+* Arduino / Zephyr
+* GPIO
+* PWM
+* ADC
+* I²C
+* SPI
+* UART
+* CAN
+
+---
+
+# 🚧 Development Roadmap
+
+## Phase 1 — Platform Setup
 
 * [x] Project concept
-* [x] Initial enclosure concept
-* [x] Hardware requirements identified
-* [x] Arduino UNO Q hardware obtained through the Autodesk University 2027 Product Contest
-* [ ] Receive and set up UNO Q
-* [ ] Linux environment setup
-* [ ] STM32 development setup
+* [x] Initial Fusion enclosure concept
+* [x] Arduino UNO Q 4GB hardware award
+* [ ] Receive UNO Q
+* [ ] Set up Linux environment
+* [ ] Test STM32 environment
+* [ ] Establish communication between the two processing environments
+
+## Phase 2 — Camera System
+
+* [ ] Select camera
 * [ ] Camera integration
-* [ ] Computer vision experiments
-* [ ] Sensor integration
-* [ ] Linux ↔ STM32 communication
-* [ ] Custom PCB
-* [ ] Enclosure fabrication
-* [ ] Full system integration
+* [ ] Test image quality
+* [ ] Determine optimal inspection distance
+* [ ] Experiment with lighting
+* [ ] Capture PCB image dataset
 
-## Why UNO Q?
+## Phase 3 — Computer Vision
 
-The UNO Q provides an interesting combination of **Linux computing and real-time microcontroller control on the same platform**.
+* [ ] PCB detection
+* [ ] Image preprocessing
+* [ ] Component detection
+* [ ] Component localization
+* [ ] Component classification
+* [ ] Perspective correction
+* [ ] Experiment with OCR
 
-Instead of using a separate computer for high-level processing and a microcontroller for hardware control, this project explores how both environments can work together.
+## Phase 4 — AI
 
-This makes the board particularly interesting for applications involving:
+* [ ] Create / collect training dataset
+* [ ] Train detection model
+* [ ] Test inference on UNO Q
+* [ ] Measure inference performance
+* [ ] Optimize model for edge deployment
 
-* Edge AI
-* Computer vision
-* Robotics
-* IoT
-* Embedded Linux
-* Industrial sensing
-* Intelligent control systems
+## Phase 5 — Diagnostic Assistance
 
-## Future Development
+* [ ] Define reference PCB configuration
+* [ ] Compare expected vs. detected components
+* [ ] Detect missing components
+* [ ] Investigate placement errors
+* [ ] Investigate visual damage detection
+* [ ] Generate inspection results
 
-Possible future directions include:
+## Phase 6 — Embedded Hardware
 
-* Real-time camera processing
-* Object and gesture detection
-* Sensor fusion
-* Local AI inference
-* Web-based monitoring
-* Remote control
-* Custom PCB with integrated sensors
-* 3D-printed enclosure
-* Standalone embedded operation
+* [ ] Integrate sensors
+* [ ] Implement controlled illumination
+* [ ] Add user interface
+* [ ] Integrate actuators if required
+* [ ] Design custom PCB
 
-The final architecture will be determined through experimentation during development.
+## Phase 7 — Final Prototype
 
-## Repository Structure
+* [ ] Manufacture PCB
+* [ ] Assemble electronics
+* [ ] Complete enclosure
+* [ ] Integrate all subsystems
+* [ ] Test complete device
+* [ ] Measure system performance
+* [ ] Document final results
+
+---
+
+# 📊 Project Status
+
+**🚧 Early Development**
+
+The project currently represents the initial concept and architecture.
+
+The first development stage will focus on getting the UNO Q, camera, Linux environment, and basic computer vision pipeline working before implementing the more ambitious diagnostic features.
+
+As development progresses, this README will be updated with:
+
+* Hardware schematics
+* PCB designs
+* CAD models
+* Photos
+* Computer vision experiments
+* AI models
+* Detection results
+* Performance measurements
+* Videos of the prototype
+
+---
+
+# 🏆 Project Origin
+
+This project was originally developed as a concept for the **Autodesk University 2027 Product Contest**.
+
+The concept proposed a portable electronics inspection device built around the Arduino UNO Q, with a camera, display, controls, internal electronics, and a custom enclosure.
+
+The project was selected for an **Arduino UNO Q 4GB hardware award**, providing the main computing platform for development.
+
+---
+
+# 📁 Repository Structure
 
 ```text
-UNO-Q-Edge-AI/
+AI-Electronics-Inspection/
 │
 ├── linux/
 │   ├── vision/
 │   ├── ai/
-│   ├── communication/
-│   └── utilities/
+│   ├── ocr/
+│   └── communication/
 │
 ├── stm32/
 │   ├── src/
@@ -194,30 +480,31 @@ UNO-Q-Edge-AI/
 ├── hardware/
 │   ├── pcb/
 │   ├── schematics/
-│   └── enclosure/
+│   └── bom/
+│
+├── enclosure/
+│   ├── fusion/
+│   └── exported/
+│
+├── datasets/
 │
 ├── docs/
-│   ├── architecture/
-│   └── images/
 │
 ├── tests/
 │
 └── README.md
 ```
 
-## Project Origin
+---
 
-This project was originally developed as a concept for the **Autodesk University 2027 Product Contest**.
-
-The project received an **Arduino UNO Q 4GB hardware award**, providing the platform for further development and experimentation.
-
-## Author
+# 👤 Author
 
 **Vlad Roibu-Constantin**
 
-Electronică Aplicată — Universitatea Politehnica Timișoara
+Electronică Aplicată
+Universitatea Politehnica Timișoara
 
-Interested in:
+### Interests
 
 * Embedded Systems
 * Computer Vision
@@ -229,4 +516,10 @@ Interested in:
 
 ---
 
-> **From concept to hardware, one experiment at a time.**
+## Project Philosophy
+
+This project is being developed through experimentation:
+
+**Build → Test → Measure → Understand → Improve**
+
+The goal is not only to create a working device, but to understand how **AI, computer vision, embedded Linux, microcontrollers, electronics, and mechanical design can be combined into a complete embedded product.**
